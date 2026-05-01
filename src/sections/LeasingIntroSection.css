@@ -8,13 +8,26 @@
   padding: 0 80px;
 }
 
-.leasing-intro__bg {
+.leasing-intro__bg-wrap {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  overflow: hidden;
   z-index: 0;
+}
+
+.leasing-intro__bg {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  animation: cinematic-pan 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes cinematic-pan {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-4%, -2%); }
 }
 
 .leasing-intro__overlay {

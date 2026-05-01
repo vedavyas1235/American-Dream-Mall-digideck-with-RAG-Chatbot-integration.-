@@ -34,22 +34,32 @@
   left: 0;
   right: 0;
   height: 52px;
-  background: rgba(8, 8, 8, 0.88);
+  background: rgba(8, 8, 8, 0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(201, 168, 76, 0.18);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   z-index: 200;
-  padding: 0 20px;
+  padding: 0 16px;
+  gap: 12px;
+  transition: border-bottom-color 0.4s ease;
+}
+
+/* Left section: hamburger + persona badge */
+.deck-topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
 }
 
 .deck-topbar__hamburger {
-  position: absolute;
-  left: 20px;
-  width: 38px;
-  height: 38px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,7 +76,7 @@
 }
 
 .deck-topbar__bar {
-  width: 22px;
+  width: 20px;
   height: 1.5px;
   background: var(--color-gold);
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -76,6 +86,73 @@
 .deck-topbar__bar--open:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .deck-topbar__bar--open:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+/* Persona badge + dots inside left section */
+.deck-topbar__persona {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.deck-topbar__persona-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--persona-color);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.deck-topbar__persona-label {
+  display: none;
+}
+@media (min-width: 640px) {
+  .deck-topbar__persona-label { display: inline; }
+}
+
+.deck-topbar__journey-dots {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.deck-topbar__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.deck-topbar__dot--done {
+  background: color-mix(in srgb, var(--persona-color) 55%, transparent);
+}
+.deck-topbar__dot--active {
+  width: 14px;
+  border-radius: 3px;
+  background: var(--persona-color);
+  box-shadow: 0 0 5px var(--persona-color);
+}
+
+.deck-topbar__step {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Center: brand text */
 .deck-topbar__title {
   font-family: var(--font-body);
   font-size: 11px;
@@ -83,15 +160,38 @@
   letter-spacing: 0.38em;
   text-transform: uppercase;
   color: var(--color-white);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
-.deck-topbar__counter {
-  position: absolute;
-  right: 20px;
+/* Right section: change role + ask ai slot */
+.deck-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.deck-topbar__change-role {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--persona-color) 45%, transparent);
+  color: var(--persona-color);
   font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--color-white-muted);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.deck-topbar__change-role:hover {
+  background: color-mix(in srgb, var(--persona-color) 12%, transparent);
+  border-color: var(--persona-color);
 }
 
 /* =========================================
@@ -246,12 +346,16 @@
   position: absolute;
   left: 0;
   bottom: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .deck-arrow--next {
   position: absolute;
   right: 0;
   bottom: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .deck-arrow--glow {
@@ -267,6 +371,9 @@
   backdrop-filter: blur(10px);
   color: var(--color-gold);
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,6 +402,143 @@
 }
 
 /* =========================================
+   RETAILER — ASK AI BOTTOM BUTTON (mall-3d only)
+   Sits beside the ← prev arrow at bottom-left
+   ========================================= */
+
+.deck-retailer-ask-ai {
+  position: fixed;
+  bottom: 32px;
+  left: 88px;           /* prev arrow is at left:32px (44px wide) + 12px gap */
+  z-index: 190;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0 18px;
+  height: 44px;         /* same height as the circular prev arrow */
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.deck-retailer-ask-ai:hover {
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 14px rgba(201, 168, 76, 0.3);
+}
+
+/* =========================================
+   RIGHT-SIDE JOURNEY PROGRESS DOTS
+   Only visible in persona mode
+   ========================================= */
+
+.deck-journey-dots-strip {
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 195;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.deck-jdot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  /* hit-area larger than visual dot */
+  outline: 8px solid transparent;
+}
+
+.deck-jdot:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.4);
+}
+
+/* Tooltip on hover */
+.deck-jdot::after {
+  content: attr(title);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8, 8, 8, 0.88);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 4px 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-left: 1px solid var(--persona-color, var(--color-gold));
+}
+
+.deck-jdot:hover::after {
+  opacity: 1;
+}
+
+/* Visited / done */
+.deck-jdot--done {
+  background: rgba(255, 255, 255, 0.25);  /* fallback: Safari < 16.4 */
+  background: color-mix(in srgb, var(--persona-color) 40%, transparent);
+}
+
+/* Active — current step */
+.deck-jdot--active {
+  width: 8px;
+  height: 8px;
+  background: var(--persona-color);
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.6), 0 0 8px var(--persona-color);
+}
+.deck-jdot--active:hover {
+  transform: scale(1.2);
+}
+
+/* =========================================
+   GOLD SWEEP LINE — directional transition
+   ========================================= */
+
+.deck-sweep-line {
+  position: fixed;
+  top: 52px;          /* below topbar */
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.7) 20%,
+    var(--color-gold) 50%,
+    rgba(201, 168, 76, 0.7) 80%,
+    transparent 100%
+  );
+  z-index: 300;
+  pointer-events: none;
+  transform-origin: left center;
+}
+
+/* =========================================
    SLIDE WRAPPER
    ========================================= */
 
@@ -305,6 +549,7 @@
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
+
 
 .deck-slide-wrapper::-webkit-scrollbar { width: 4px; }
 .deck-slide-wrapper::-webkit-scrollbar-track { background: transparent; }
@@ -368,3 +613,167 @@
     font-size: 13px;
   }
 }
+
+/* =========================================
+   PERSONA JOURNEY BAR
+   ========================================= */
+
+.deck-journey-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  z-index: 250;
+  background: rgba(6, 6, 10, 0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid color-mix(in srgb, var(--persona-color) 30%, transparent);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+.deck-journey-bar__badge {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--persona-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.deck-journey-bar__dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.deck-journey-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.deck-journey-dot--done {
+  background: color-mix(in srgb, var(--persona-color) 60%, transparent);
+}
+
+.deck-journey-dot--active {
+  width: 18px;
+  border-radius: 3px;
+  background: var(--persona-color);
+  box-shadow: 0 0 6px var(--persona-color);
+}
+
+.deck-journey-bar__step {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.deck-journey-bar__reset {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.35);
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.deck-journey-bar__reset:hover {
+  border-color: var(--persona-color);
+  color: var(--persona-color);
+}
+
+/* Offset topbar when journey bar is visible */
+.deck-topbar {
+  /* Already positioned top:0 — moved down by journey bar when active */
+  transition: top 0.4s ease;
+}
+
+/* Journey shortcut in drawer */
+.deck-drawer__journey {
+  margin: 16px 16px 0;
+  border: 1px solid;
+  padding: 12px 14px;
+  border-radius: 2px;
+}
+
+.deck-drawer__journey-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.deck-drawer__journey-slides {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.deck-journey-slide-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.45);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 6px 10px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.deck-journey-slide-btn:hover {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.7);
+}
+
+.deck-journey-slide-btn--active {
+  border-color: inherit;
+  color: inherit;
+  background: rgba(255,255,255,0.04);
+}
+
+.deck-journey-slide-btn--done {
+  opacity: 0.5;
+}
+
+.deck-journey-slide-btn__num {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  min-width: 14px;
+}
+

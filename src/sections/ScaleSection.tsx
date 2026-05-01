@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useDeck } from '../components/Deck/DeckEngine'
 import './ScaleSection.css'
 
 function useCountUp(target: number, duration: number, start: boolean) {
@@ -50,7 +51,12 @@ const STATS = [
   { value: 2019, suffix: '', label: 'Year Opened', description: 'The most anticipated commercial opening in decades', delay: 0.5 },
 ]
 
-export default function ScaleSection({ goToSlideById }: any) {
+export default function ScaleSection() {
+  const { next, persona } = useDeck()
+  const isRetailer = persona === 'retailer'
+  const isSponsor = persona === 'sponsor'
+  const isOrganizer = persona === 'organizer'
+  const useNextArrow = isRetailer || isSponsor || isOrganizer
   const [inView, setInView] = useState(false)
   const [glow, setGlow] = useState(false)
   const ref = useRef<HTMLElement>(null)
@@ -71,12 +77,15 @@ export default function ScaleSection({ goToSlideById }: any) {
 
   return (
     <section id="scale" className="scale-section" ref={ref}>
-      <button 
-        className={`catchment-btn ${glow ? 'catchment-btn--glow' : ''}`}
-        onClick={() => goToSlideById?.('catchment')}
-      >
-        Catchment Area →
-      </button>
+      {/* Catchment Area button — hidden in Retailer + Sponsor personas */}
+      {!useNextArrow && (
+        <button 
+          className={`catchment-btn ${glow ? 'catchment-btn--glow' : ''}`}
+          onClick={() => next()}
+        >
+          Catchment Area →
+        </button>
+      )}
 
       <div className="scale-section__inner">
         <div className="scale-section__header">
@@ -119,6 +128,16 @@ export default function ScaleSection({ goToSlideById }: any) {
           ))}
         </div>
 
+        {/* Retailer + Sponsor: next arrow at bottom-right */}
+        {useNextArrow && (
+          <button
+            className="scale-retailer-next"
+            onClick={() => next()}
+            aria-label="Next slide"
+          >
+            →
+          </button>
+        )}
 
       </div>
     </section>

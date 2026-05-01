@@ -1,0 +1,357 @@
+/* =============================================
+   OPPORTUNITY CONFIGURATOR SECTION
+   ============================================= */
+
+.opp-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 56px 60px 32px;
+  gap: 28px;
+}
+
+/* ── Background ── */
+.opp-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #04040a 0%, #070710 50%, #04040a 100%);
+  z-index: 0;
+}
+
+.opp-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 18% 28%, rgba(201,168,76,0.22) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 14%, rgba(201,168,76,0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 43% 68%, rgba(201,168,76,0.18) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 52%, rgba(201,168,76,0.13) 0%, transparent 100%),
+    radial-gradient(1px 1px at 9% 78%, rgba(201,168,76,0.1) 0%, transparent 100%);
+}
+
+/* ── Header ── */
+.opp-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.opp-header__title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: 300;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-top: 10px;
+}
+
+.opp-header__title em {
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+
+/* ── Cards Container ── */
+.opp-cards {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  max-width: 1320px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Individual Card ── */
+.opp-card {
+  flex: 1;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: var(--card-gradient);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    flex 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.opp-card:hover {
+  transform: translateY(-3px);
+}
+
+.opp-card--focused {
+  flex: 1.6;
+  border-color: var(--card-color);
+  box-shadow: 0 0 50px rgba(0,0,0,0.4), 0 0 0 1px var(--card-color)33;
+}
+
+.opp-card--dimmed {
+  flex: 0.8;
+  opacity: 0.4;
+}
+
+/* ── Card Background ── */
+.opp-card__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--card-gradient);
+  z-index: 0;
+}
+
+/* ── Top Glow Line ── */
+.opp-card__glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-color), transparent);
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.opp-card--focused .opp-card__glow {
+  opacity: 1;
+  animation: opp-glow-sweep 2.5s ease-in-out infinite;
+}
+
+@keyframes opp-glow-sweep {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; box-shadow: 0 0 16px var(--card-color); }
+}
+
+/* ── Card Content (always visible) ── */
+.opp-card__collapsed {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px 28px 28px;
+  text-align: center;
+  height: 100%;
+}
+
+.opp-card__icon {
+  font-size: 38px;
+  display: block;
+  filter: drop-shadow(0 0 14px var(--card-color));
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.opp-card--focused .opp-card__icon {
+  transform: scale(1.15);
+}
+
+.opp-card__role {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--card-color);
+  flex-shrink: 0;
+}
+
+.opp-card__divider {
+  width: 32px;
+  height: 1px;
+  background: var(--card-color);
+  opacity: 0.45;
+  flex-shrink: 0;
+  transition: width 0.35s ease, opacity 0.35s ease;
+}
+
+.opp-card--focused .opp-card__divider {
+  width: 56px;
+  opacity: 0.85;
+}
+
+/* ── Headline ── */
+.opp-card__headline {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.5vw, 24px);
+  font-weight: 300;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ── Stats ── */
+.opp-card__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.opp-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: border-color 0.3s ease;
+}
+
+.opp-card--focused .opp-stat {
+  border-color: rgba(255,255,255,0.12);
+}
+
+.opp-stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.4vw, 22px);
+  font-weight: 300;
+  color: var(--card-color);
+  line-height: 1;
+}
+
+.opp-stat__label {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── Tagline ── */
+.opp-card__tagline {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.7;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.opp-card--focused .opp-card__tagline {
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── CTA Label ── */
+.opp-card__cta {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--card-color);
+  padding: 10px 24px;
+  border: 1px solid var(--card-color);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.opp-card--focused .opp-card__cta,
+.opp-card:hover .opp-card__cta {
+  opacity: 1;
+  background: rgba(0,0,0,0.3);
+}
+
+/* ── Hint ── */
+.opp-hint {
+  position: relative;
+  z-index: 10;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+  text-align: center;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* ── Browse Full Presentation button ── */
+.opp-browse-btn {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.28);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 9px 24px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  margin-top: 2px;
+}
+
+.opp-browse-btn:hover {
+  border-color: var(--color-gold);
+  color: rgba(255,255,255,0.6);
+  box-shadow: 0 0 12px rgba(201,168,76,0.35), 0 0 24px rgba(201,168,76,0.15);
+  animation: browse-border-glow 1.8s ease-in-out infinite;
+}
+
+@keyframes browse-border-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(201,168,76,0.3), 0 0 16px rgba(201,168,76,0.1); }
+  50% { box-shadow: 0 0 18px rgba(201,168,76,0.6), 0 0 32px rgba(201,168,76,0.25); }
+}
+
+/* ── Journey Preview Dots (on each card) ── */
+.opp-card__journey-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.opp-card--focused .opp-card__journey-dots {
+  opacity: 0.75;
+}
+
+.opp-journey-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--card-color);
+  opacity: 0.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .opp-section { padding: 40px 24px 28px; gap: 20px; }
+  .opp-cards { flex-direction: column; }
+  .opp-card--focused { flex: 1.8; }
+  .opp-card--dimmed { flex: 0.7; opacity: 0.5; }
+  .opp-card__stats { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .opp-cards { gap: 8px; }
+  .opp-card__stats { grid-template-columns: repeat(2, 1fr); }
+  .opp-card__headline { font-size: 16px; }
+}
+

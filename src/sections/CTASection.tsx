@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useDeckSafe } from '../components/Deck/DeckEngine'
 import './CTASection.css'
 
 type FormType = 'leasing' | 'sponsorship' | 'events'
@@ -26,6 +27,8 @@ const PATHS: { id: FormType; title: string; sub: string; icon: string }[] = [
 ]
 
 export default function CTASection() {
+  const deck = useDeckSafe()
+  const persona = deck?.persona ?? null
   const [active, setActive] = useState<FormType>('leasing')
   const [submitted, setSubmitted] = useState(false)
   const [inView, setInView] = useState(false)
@@ -45,15 +48,62 @@ export default function CTASection() {
     setSubmitted(true)
   }
 
+  const openChat = () => {
+    window.dispatchEvent(new CustomEvent('deck:open-chat'))
+  }
+
   return (
     <section id="cta" className="cta-section" ref={ref}>
-      {/* Background */}
+
+      {/* Bottom-right buttons:
+          - Persona active: [Ask AI] [3D Map →] pair
+          - Linear deck (no persona): solo 3D Map button (unchanged) */}
+      {deck && (
+        persona ? (
+          <div className="cta-bottom-pair">
+            <button
+              className="cta-ask-ai-btn"
+              onClick={openChat}
+              title="Ask our AI assistant"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              Ask AI
+            </button>
+            <button
+              onClick={() => deck.goToSlideById('mall-3d')}
+              className="cta-3d-btn"
+              title="Explore Interactive 3D Floor Map"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+              </svg>
+              3D Map
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => deck.goToSlideById('mall-3d')}
+            className="cta-3d-btn"
+            title="Explore Interactive 3D Floor Map"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+            </svg>
+            3D Map
+          </button>
+        )
+      )}
+      {/* Background — same aerial mall video as Catchment section */}
       <div className="cta-section__bg">
-        <img
-          src="https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=1600&q=80&auto=format&fit=crop"
-          alt=""
-          aria-hidden
-          loading="lazy"
+        <video
+          src="/assets/videos/american_dream_intro.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.1)', transformOrigin: 'center center' }}
         />
         <div className="cta-section__bg-overlay" />
       </div>
@@ -185,6 +235,7 @@ export default function CTASection() {
             <span className="cta-footer-brand">AMERICAN DREAM</span>
             <span className="cta-footer-sub">East Rutherford, NJ · Est. 2019</span>
           </div>
+          {/* 3D Mall Explorer link removed from footer — now fixed bottom-right */}
         </motion.div>
       </div>
     </section>

@@ -34,11 +34,13 @@ export default function LeasingIntroSection() {
 
   return (
     <section className="leasing-intro" ref={ref}>
-      <img
-        className="leasing-intro__bg"
-        src="https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1400"
-        alt="Retail interior"
-      />
+      <div className="leasing-intro__bg-wrap">
+        <img
+          className="leasing-intro__bg"
+          src="/assets/images/leasing_crowd_emotion.png"
+          alt="Massive retail crowd"
+        />
+      </div>
       <div className="leasing-intro__overlay" />
       
       <div className="leasing-intro__content">

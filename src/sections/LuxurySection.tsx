@@ -13,6 +13,7 @@ const LUXURY_SLIDES = [
     description: `Saks Fifth Avenue anchors The Avenue with two full floors of designer fashion, beauty, and accessories. The only full-line Saks in the greater New York metro area outside its Midtown Manhattan flagship.`,
     url: 'https://www.americandream.com/stores/saks-fifth-avenue',
     img: 'https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/saks_fifth_avenue.mp4',
     fallback: '#1a1208',
     accent: '#c9a84c',
   },
@@ -24,6 +25,7 @@ const LUXURY_SLIDES = [
     description: `Gucci's American Dream boutique spans two levels of The Avenue, showcasing the full range of the house's iconic ready-to-wear, handbags, shoes, and accessories in an architecturally stunning setting.`,
     url: 'https://www.americandream.com/stores/gucci',
     img: 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/gucci.mp4',
     fallback: '#1a0808',
     accent: '#b5453a',
   },
@@ -35,6 +37,7 @@ const LUXURY_SLIDES = [
     description: `Saint Laurent brings its dark, rock-and-roll Parisian sensibility to The Avenue across two levels. Iconic YSL leather goods, footwear, and the latest ready-to-wear collections exclusively curated for this location.`,
     url: 'https://www.americandream.com/stores/saint-laurent',
     img: 'https://images.pexels.com/photos/2220316/pexels-photo-2220316.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/saint_laurent.mp4',
     fallback: '#141408',
     accent: '#d4af37',
   },
@@ -46,6 +49,7 @@ const LUXURY_SLIDES = [
     description: `One of the world's most coveted luxury houses, Hermès brings its full collection of leather goods, silk scarves, fragrances, and ready-to-wear to The Avenue — surrounded by an unparalleled 40 million visitor catchment.`,
     url: 'https://www.americandream.com/stores/hermes',
     img: 'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/hermes.mp4',
     fallback: '#1a0d00',
     accent: '#f26522',
   },
@@ -57,6 +61,7 @@ const LUXURY_SLIDES = [
     description: `Balenciaga's American Dream boutique puts the cutting edge of high fashion steps away from North America's largest indoor theme park — a juxtaposition that perfectly captures the spirit of The Avenue.`,
     url: 'https://www.americandream.com/stores/balenciaga',
     img: 'https://images.pexels.com/photos/3765132/pexels-photo-3765132.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/balenciaga.mp4',
     fallback: '#0d0d0d',
     accent: '#aaaaaa',
   },
@@ -68,6 +73,7 @@ const LUXURY_SLIDES = [
     description: `Tiffany & Co. at The Avenue offers their iconic jewelry, engagement rings, and home collection. A destination for milestone moments, powered by the 40 million visitors who pass through American Dream each year.`,
     url: 'https://www.americandream.com/stores/tiffany-co',
     img: 'https://images.pexels.com/photos/691046/pexels-photo-691046.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/tiffany_co.mp4',
     fallback: '#001a18',
     accent: '#0abab5',
   },
@@ -79,6 +85,7 @@ const LUXURY_SLIDES = [
     description: `Ferrari's American Dream boutique is one of the most exclusive lifestyle retail destinations in North America. Offering the brand's iconic apparel, accessories, scale models, and bespoke merchandise — steps from Saks Fifth Avenue and Gucci.`,
     url: 'https://www.americandream.com/stores/ferrari',
     img: 'https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/ferrari.mp4',
     fallback: '#1a0300',
     accent: '#e8001a',
   },
@@ -90,6 +97,7 @@ const LUXURY_SLIDES = [
     description: `The Rolex boutique at The Avenue carries the full range of Rolex sports and dress watches — from the Submariner to the Day-Date — in an authorized dealership setting that befits the world's most recognized watch brand.`,
     url: 'https://www.americandream.com/stores/rolex',
     img: 'https://images.pexels.com/photos/236748/pexels-photo-236748.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/rolex.mp4',
     fallback: '#0d1a00',
     accent: '#8B9A46',
   },
@@ -101,6 +109,7 @@ const LUXURY_SLIDES = [
     description: `Dolce & Gabbana's bold Mediterranean glamour lands in The Avenue with their full men's and women's collections, iconic accessories, and the signature DG attitude that draws high-income shoppers from across the tri-state area.`,
     url: 'https://www.americandream.com/stores/dolce-gabbana',
     img: 'https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/dolce_gabbana.mp4',
     fallback: '#1a0808',
     accent: '#c9a84c',
   },
@@ -112,6 +121,7 @@ const LUXURY_SLIDES = [
     description: `Watches of Switzerland brings its curated collection of Rolex, Patek Philippe, Audemars Piguet, and IWC to The Avenue — the only authorized multi-brand luxury watch retailer in the NY/NJ metro region.`,
     url: 'https://www.americandream.com/stores/watches-of-switzerland',
     img: 'https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/watches_of_switzerland.mp4',
     fallback: '#051120',
     accent: '#1c3557',
   },
@@ -123,6 +133,7 @@ const LUXURY_SLIDES = [
     description: `Mulberry's American Dream boutique showcases their signature Bayswater, Alexa, and Lily collections — crafted in Somerset, England — alongside seasonal leather goods and accessories for the US market.`,
     url: 'https://www.americandream.com/stores/mulberry',
     img: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/mulberry.mp4',
     fallback: '#140f08',
     accent: '#8B7355',
   },
@@ -134,6 +145,7 @@ const LUXURY_SLIDES = [
     description: `BAPE at The Avenue bridges The Avenue's luxury positioning with the energy of Nickelodeon Universe next door. The iconic Japanese streetwear brand draws collectors, sneakerheads, and fashion-forward shoppers year-round.`,
     url: 'https://www.americandream.com/stores/bape',
     img: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1400',
+    video: '/assets/videos/bape.mp4',
     fallback: '#081a08',
     accent: '#2c8c3e',
   },
@@ -142,7 +154,6 @@ const LUXURY_SLIDES = [
 export default function LuxurySection() {
   const [current, setCurrent] = useState(0)
   const [inView, setInView] = useState(false)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({})
   const ref = useRef<HTMLElement>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -161,10 +172,9 @@ export default function LuxurySection() {
   }, [])
 
   useEffect(() => {
-    if (!isAutoPlaying) return
     timerRef.current = setTimeout(() => { goTo(current + 1) }, 5500)
     return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [current, isAutoPlaying, goTo])
+  }, [current, goTo])
 
   const slide = LUXURY_SLIDES[current]
   const hasBrightAccent = ['#888888', '#aaaaaa'].includes(slide.accent)
@@ -186,10 +196,30 @@ export default function LuxurySection() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
         >
-          {!imgErrors[current] && (
+          {!imgErrors[current] && (slide as any).video ? (
+            <video
+              src={(slide as any).video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ 
+                width: '100%', 
+                height: '112%', 
+                objectFit: 'cover', 
+                objectPosition: 'center top',
+                position: 'absolute', 
+                top: 0, 
+                left: 0, 
+                zIndex: 0 
+              }}
+              onError={() => handleImgError(current)}
+            />
+          ) : !imgErrors[current] && (
             <img
               src={slide.img}
               alt={slide.brand}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 0 }}
               onError={() => handleImgError(current)}
             />
           )}
@@ -231,7 +261,7 @@ export default function LuxurySection() {
               <button
                 key={i}
                 className={`luxury-dot ${i === current ? 'luxury-dot--active' : ''}`}
-                onClick={() => { setIsAutoPlaying(false); goTo(i) }}
+                onClick={() => goTo(i)}
                 aria-label={`Go to ${s.brand}`}
                 style={{ '--dot-accent': s.accent } as React.CSSProperties}
               />
@@ -242,7 +272,7 @@ export default function LuxurySection() {
           <div className="luxury-nav">
             <button
               className="luxury-nav__btn"
-              onClick={() => { setIsAutoPlaying(false); goTo(current - 1) }}
+              onClick={() => goTo(current - 1)}
               aria-label="Previous brand"
             >
               ←
@@ -252,7 +282,7 @@ export default function LuxurySection() {
             </span>
             <button
               className="luxury-nav__btn"
-              onClick={() => { setIsAutoPlaying(false); goTo(current + 1) }}
+              onClick={() => goTo(current + 1)}
               aria-label="Next brand"
             >
               →
@@ -289,8 +319,7 @@ export default function LuxurySection() {
             <div className="gold-line" />
             <p className="luxury-card__desc">{slide.description}</p>
 
-            {isAutoPlaying && (
-              <div className="luxury-progress">
+            <div className="luxury-progress">
                 <motion.div
                   key={current + '-progress'}
                   className="luxury-progress__bar"
@@ -299,8 +328,7 @@ export default function LuxurySection() {
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 5.5, ease: 'linear' }}
                 />
-              </div>
-            )}
+            </div>
 
             <a
               href={slide.url}

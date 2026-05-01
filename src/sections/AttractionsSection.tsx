@@ -15,6 +15,7 @@ const ATTRACTIONS = [
       { v: '365', l: 'Days a Year' },
     ],
     img: 'https://images.pexels.com/photos/848612/pexels-photo-848612.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    video: '/assets/videos/big_snow.mp4',
     color: '#4a9eff',
     youtubeId: 'N50D6lbUYHg',
   },
@@ -30,6 +31,7 @@ const ATTRACTIONS = [
       { v: '#1', l: 'Indoor Theme Park in NA' },
     ],
     img: 'https://images.pexels.com/photos/1036936/pexels-photo-1036936.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    video: '/assets/videos/nickelodeon.mp4',
     color: '#ff6b00',
     youtubeId: 'WZBmyDaKB1w',
   },
@@ -45,6 +47,7 @@ const ATTRACTIONS = [
       { v: '12mo', l: 'Year-Round' },
     ],
     img: 'https://images.pexels.com/photos/1449934/pexels-photo-1449934.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    video: '/assets/videos/water_park.mp4',
     color: '#00b4d8',
     youtubeId: '',
   },
@@ -60,6 +63,7 @@ const ATTRACTIONS = [
       { v: 'Merlin', l: 'Global Partner' },
     ],
     img: 'https://images.pexels.com/photos/3894157/pexels-photo-3894157.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    video: '/assets/videos/sea_life.mp4',
     color: '#00897b',
     youtubeId: '',
   },
@@ -80,16 +84,15 @@ export default function AttractionsSection() {
   }, [])
 
   // Auto-play logic
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    if (!isAutoPlaying || !inView) return
+    if (!inView) return
     timerRef.current = setTimeout(() => {
       setActive((prev) => (prev + 1) % ATTRACTIONS.length)
     }, 6000) // Cycle every 6 seconds
     return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [active, isAutoPlaying, inView])
+  }, [active, inView])
 
   const att = ATTRACTIONS[active]
 
@@ -98,14 +101,25 @@ export default function AttractionsSection() {
       {/* Background */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={att.id}
+          key={att.id + '-bg'}
           className="attractions-section__bg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <img src={att.img} alt={att.name} />
+          {att.video ? (
+            <video
+              src={att.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: 0 }}
+            />
+          ) : (
+            <img src={att.img} alt={att.name} />
+          )}
           <div className="attractions-section__bg-overlay" />
         </motion.div>
       </AnimatePresence>
@@ -138,7 +152,6 @@ export default function AttractionsSection() {
               className={`attractions-tab ${active === i ? 'attractions-tab--active' : ''}`}
               onClick={() => {
                 setActive(i)
-                setIsAutoPlaying(false) // Pause auto-play if user manually interacts
               }}
               style={{ '--accent': a.color } as React.CSSProperties}
             >
@@ -182,7 +195,6 @@ export default function AttractionsSection() {
               className={`attractions-dot ${active === i ? 'attractions-dot--active' : ''}`}
               onClick={() => {
                 setActive(i)
-                setIsAutoPlaying(false)
               }}
               aria-label={a.name}
             />

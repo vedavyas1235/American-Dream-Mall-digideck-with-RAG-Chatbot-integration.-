@@ -348,3 +348,89 @@
   .cta-section__footer { grid-template-columns: 1fr; }
   .cta-footer-credit { text-align: left; }
 }
+
+/* 3D Map button — fixed bottom-right, replaces next arrow on CTA slide */
+.cta-3d-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 190;
+  width: auto;
+  height: 44px;
+  padding: 0 18px;
+  margin: 0;
+  line-height: 1;
+  border-radius: 22px;
+  border: 1px solid rgba(201, 168, 76, 0.38);
+  background: rgba(8, 8, 8, 0.75);
+  backdrop-filter: blur(10px);
+  color: var(--color-gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  pointer-events: all;
+  transition: all 0.2s ease;
+}
+
+.cta-3d-btn:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.12);
+  transform: scale(1.04);
+}
+
+/* ── Persona mode: [Ask AI] [3D Map →] pair at bottom-right ── */
+.cta-bottom-pair {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 190;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* When inside the pair, override fixed positioning */
+.cta-bottom-pair .cta-3d-btn {
+  position: static;
+}
+
+/* Ask AI button — mirrors 3D Map button style */
+.cta-ask-ai-btn {
+  position: static;
+  height: 44px;
+  padding: 0 18px;
+  margin: 0;
+  line-height: 1;
+  border-radius: 22px;
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  background: rgba(8, 8, 8, 0.75);
+  backdrop-filter: blur(10px);
+  color: var(--color-gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.cta-ask-ai-btn:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.14);
+  box-shadow: 0 0 14px rgba(201, 168, 76, 0.25);
+  transform: scale(1.04);
+}
+
+

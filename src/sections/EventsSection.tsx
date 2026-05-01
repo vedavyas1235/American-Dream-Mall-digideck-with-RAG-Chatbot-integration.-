@@ -29,7 +29,8 @@ const EVENTS = [
 
 
 export default function EventsSection() {
-  const { goToSlideById } = useDeck()
+  const { goToSlideById, next, persona } = useDeck()
+  const isSponsor = persona === 'sponsor'
   const [active, setActive] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [inView, setInView] = useState(false)
@@ -105,15 +106,26 @@ export default function EventsSection() {
                 ))}
             </div>
 
-            <motion.button
-              className={`venue-directory-btn ${glowVenueBtn ? 'venue-directory-btn--glow' : ''}`}
-              onClick={() => goToSlideById('venue-summary')}
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              See Venue Directory →
-            </motion.button>
+            {/* Sponsor persona: circular next arrow. Others: Venue Directory CTA */}
+            {isSponsor ? (
+              <button
+                className="events-sponsor-next"
+                onClick={() => next()}
+                aria-label="Next slide"
+              >
+                →
+              </button>
+            ) : (
+              <motion.button
+                className={`venue-directory-btn ${glowVenueBtn ? 'venue-directory-btn--glow' : ''}`}
+                onClick={() => goToSlideById('venue-summary')}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                See Venue Directory →
+              </motion.button>
+            )}
           </div>
         </div>
 

@@ -1,23 +1,23 @@
 /* ============================================
-   CHATBOT TOPBAR BUTTON
+   CHATBOT TOPBAR BUTTON — matches Change Role button exactly
    ============================================ */
 .chatbot-topbar-btn {
   position: fixed;
   top: 9px;
-  right: 72px; /* sits left of the slide counter */
-  z-index: 250;
+  right: 16px;
+  z-index: 210;
   display: flex;
   align-items: center;
-  gap: 7px;
-  background: rgba(201, 168, 76, 0.12);
-  border: 1px solid rgba(201, 168, 76, 0.45);
+  gap: 6px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.4);
   color: var(--color-gold);
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 7px 14px;
+  padding: 5px 12px;
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.22s ease;
@@ -27,7 +27,6 @@
 .chatbot-topbar-btn:hover {
   background: rgba(201, 168, 76, 0.22);
   border-color: var(--color-gold);
-  transform: translateY(-1px);
 }
 
 /* ============================================

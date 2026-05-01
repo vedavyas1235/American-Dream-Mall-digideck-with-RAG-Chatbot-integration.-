@@ -15,7 +15,11 @@ const AUDIENCE_METRICS = [
 ]
 
 export default function AudienceSection() {
-  const { goToSlideById } = useDeck()
+  const { goToSlideById, next, persona } = useDeck()
+  const isRetailer = persona === 'retailer'
+  const isSponsor = persona === 'sponsor'
+  const isOrganizer = persona === 'organizer'
+  const useNextArrow = isRetailer || isSponsor || isOrganizer
   const [inView, setInView] = useState(false)
   const [glowBtn, setGlowBtn] = useState(false)
   const ref = useRef<HTMLElement>(null)
@@ -64,15 +68,26 @@ export default function AudienceSection() {
           ))}
         </div>
 
-        <motion.button
-          className={`audience-nav-btn ${glowBtn ? 'audience-nav-btn--glow' : ''}`}
-          onClick={() => goToSlideById('partnership-tiers')}
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          Partnership Levels →
-        </motion.button>
+        {/* Retailer + Sponsor: circular next arrow. Others: Partnership Levels CTA */}
+        {useNextArrow ? (
+          <button
+            className="audience-retailer-next"
+            onClick={() => next()}
+            aria-label="Next slide"
+          >
+            →
+          </button>
+        ) : (
+          <motion.button
+            className={`audience-nav-btn ${glowBtn ? 'audience-nav-btn--glow' : ''}`}
+            onClick={() => goToSlideById('partnership-tiers')}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            Partnership Levels →
+          </motion.button>
+        )}
       </div>
     </section>
   )

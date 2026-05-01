@@ -6,28 +6,75 @@ const DINING_SPOTS = [
   {
     name: 'Aiya',
     category: 'Japanese Omakase',
-    img: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&q=85&auto=format&fit=crop',
+    images: [
+      '/assets/images/japanese_omakase_aiya.png',
+      '/assets/images/japanese_omakase_plate.png',
+      '/assets/images/japanese_omakase_interior.png'
+    ],
     desc: 'An intimate, curated omakase experience with seasonal Japanese cuisine.',
   },
   {
     name: 'Don Angie',
     category: 'Italian Fine Dining',
-    img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=85&auto=format&fit=crop',
+    images: [
+      '/assets/images/italian_dining_interior.png',
+      '/assets/images/italian_dining_pasta.png',
+      '/assets/images/italian_dining_wine.png'
+    ],
     desc: 'Award-winning Italian cooking in a warm, sophisticated setting.',
   },
   {
     name: 'Shake Shack',
     category: 'Modern Burger Bar',
-    img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=85&auto=format&fit=crop',
+    images: [
+      '/assets/images/burger_bar_burger.png',
+      '/assets/images/burger_bar_interior.png',
+      '/assets/images/burger_bar_fries_shake.png'
+    ],
     desc: 'The iconic American burger destination with a signature ShackBurger.',
   },
   {
     name: 'The Food Hall',
     category: '40+ Vendors Under One Roof',
-    img: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&q=85&auto=format&fit=crop',
+    images: [
+      '/assets/images/food_hall_interior.png',
+      '/assets/images/food_hall_global_spread.png',
+      '/assets/images/food_hall_live_cooking.png'
+    ],
     desc: 'An artisanal marketplace featuring global cuisines, craft beverages, and live cooking.',
   },
 ]
+
+function ImageSlideshow({ images, alt }: { images: string[], alt: string }) {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrent(prev => (prev + 1) % images.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [images])
+
+  return (
+    <>
+      {images.map((src, idx) => (
+        <img 
+          key={src} 
+          src={src} 
+          alt={`${alt} ${idx}`} 
+          loading="lazy" 
+          style={{ 
+            opacity: current === idx ? 1 : 0, 
+            transition: 'opacity 1s ease-in-out', 
+            position: idx === 0 ? 'relative' : 'absolute',
+            top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover'
+          }} 
+        />
+      ))}
+    </>
+  )
+}
 
 export default function DiningSection() {
   const [inView, setInView] = useState(false)
@@ -73,7 +120,7 @@ export default function DiningSection() {
               transition={{ duration: 0.8, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="dining-card__img-wrap">
-                <img src={spot.img} alt={spot.name} loading="lazy" />
+                <ImageSlideshow images={spot.images} alt={spot.name} />
                 <div className="dining-card__overlay" />
               </div>
               <div className="dining-card__body">

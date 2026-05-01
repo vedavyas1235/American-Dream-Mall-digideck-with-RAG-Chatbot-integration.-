@@ -235,3 +235,30 @@
   .events-section { padding: 80px 24px; }
   .events-collage__title { font-size: 14px !important; }
 }
+
+/* ── Sponsor-only: circular next arrow — matches deck arrow spec ── */
+.events-sponsor-next {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid rgba(201, 168, 76, 0.38);
+  color: var(--color-gold);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+.events-sponsor-next:hover {
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--color-gold);
+  transform: scale(1.06);
+}
+

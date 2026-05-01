@@ -45,10 +45,13 @@ export default function CatchmentSection() {
           </div>
           <div className="scale-section__map">
             <div className="scale-section__map-img-wrap">
-              <img
-                src="/american-dream-exterior.jpg"
-                alt="American Dream Mall — East Rutherford, NJ"
-                loading="lazy"
+              <video
+                src="/assets/videos/american_dream_intro.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
             <div className="scale-section__map-caption">

@@ -178,3 +178,29 @@
   .tiers-grid { grid-template-columns: 1fr; gap: 12px; }
   .tier-card { padding: 24px; gap: 16px; }
 }
+
+/* ── Sponsor-only: circular next arrow — matches deck arrow spec ── */
+.tiers-sponsor-next {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid rgba(201, 168, 76, 0.38);
+  color: var(--color-gold);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+.tiers-sponsor-next:hover {
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--color-gold);
+  transform: scale(1.06);
+}

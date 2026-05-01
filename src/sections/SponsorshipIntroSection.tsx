@@ -4,7 +4,8 @@ import { useDeck } from '../components/Deck/DeckEngine'
 import './SponsorshipIntroSection.css'
 
 export default function SponsorshipIntroSection() {
-  const { goToSlideById } = useDeck()
+  const { goToSlideById, next, persona } = useDeck()
+  const isSponsor = persona === 'sponsor'
   const [inView, setInView] = useState(false)
   const [glowBtn, setGlowBtn] = useState(false)
   const ref = useRef<HTMLElement>(null)
@@ -25,10 +26,13 @@ export default function SponsorshipIntroSection() {
 
   return (
     <section className="sp-intro" ref={ref}>
-      <img
+      <video
         className="sp-intro__bg"
-        src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1400"
-        alt="Brand partnership"
+        src="/assets/videos/your_brand.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
       />
       <div className="sp-intro__overlay" />
       
@@ -49,15 +53,26 @@ export default function SponsorshipIntroSection() {
         </motion.div>
       </div>
 
-      <motion.button
-        className={`sp-intro-btn ${glowBtn ? 'sp-intro-btn--glow' : ''}`}
-        onClick={() => goToSlideById('audience')}
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 1 }}
-      >
-        Audience Profile →
-      </motion.button>
+      {/* Sponsor persona: circular next arrow. Others: Audience Profile CTA */}
+      {isSponsor ? (
+        <button
+          className="sp-intro-sponsor-next"
+          onClick={() => next()}
+          aria-label="Next slide"
+        >
+          →
+        </button>
+      ) : (
+        <motion.button
+          className={`sp-intro-btn ${glowBtn ? 'sp-intro-btn--glow' : ''}`}
+          onClick={() => goToSlideById('audience')}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          Audience Profile →
+        </motion.button>
+      )}
     </section>
   )
 }

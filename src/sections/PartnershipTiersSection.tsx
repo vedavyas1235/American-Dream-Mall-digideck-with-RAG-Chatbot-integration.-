@@ -60,7 +60,8 @@ const SPONSORSHIP_TIERS = [
 ]
 
 export default function PartnershipTiersSection() {
-  const { goToSlideById } = useDeck()
+  const { goToSlideById, next, persona } = useDeck()
+  const isSponsor = persona === 'sponsor'
   const [inView, setInView] = useState(false)
   const [glowBtn, setGlowBtn] = useState(false)
   const ref = useRef<HTMLElement>(null)
@@ -125,15 +126,26 @@ export default function PartnershipTiersSection() {
           ))}
         </div>
 
-        <motion.button
-          className={`tiers-nav-btn ${glowBtn ? 'tiers-nav-btn--glow' : ''}`}
-          onClick={() => goToSlideById('existing-partners')}
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          Existing Partners →
-        </motion.button>
+        {/* Sponsor persona: circular next arrow. Others: Existing Partners CTA */}
+        {isSponsor ? (
+          <button
+            className="tiers-sponsor-next"
+            onClick={() => next()}
+            aria-label="Next slide"
+          >
+            →
+          </button>
+        ) : (
+          <motion.button
+            className={`tiers-nav-btn ${glowBtn ? 'tiers-nav-btn--glow' : ''}`}
+            onClick={() => goToSlideById('existing-partners')}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            Existing Partners →
+          </motion.button>
+        )}
       </div>
     </section>
   )

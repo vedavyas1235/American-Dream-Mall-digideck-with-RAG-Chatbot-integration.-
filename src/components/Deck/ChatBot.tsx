@@ -41,8 +41,28 @@ async function queryRAG(question: string): Promise<string> {
   }
 }
 
-export default function ChatBot({ isLastSlide }: { isLastSlide: boolean }) {
-  const [open, setOpen] = useState(false)
+export default function ChatBot({
+  isLastSlide,
+  isOpen: externalOpen,
+  onToggle,
+}: {
+  isLastSlide: boolean
+  isOpen?: boolean
+  onToggle?: () => void
+}) {
+  const [internalOpen, setInternalOpen] = useState(false)
+
+  // Use external control if provided, otherwise internal
+  const open = externalOpen !== undefined ? externalOpen : internalOpen
+  const setOpen = (val: boolean | ((prev: boolean) => boolean)) => {
+    const desired = typeof val === 'function' ? val(open) : val
+    if (onToggle) {
+      // Only toggle if the desired state is different from current
+      if (desired !== open) onToggle()
+    } else {
+      setInternalOpen(desired)
+    }
+  }
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -58,10 +78,11 @@ export default function ChatBot({ isLastSlide }: { isLastSlide: boolean }) {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
 
-  // Close chat when navigating away from last slide
+  // Auto-close when navigating away — only applies in internal (non-external) mode
+  // In persona/external mode, the parent (DeckNav) controls open state
   useEffect(() => {
-    if (!isLastSlide) setOpen(false)
-  }, [isLastSlide])
+    if (!isLastSlide && !onToggle) setInternalOpen(false)
+  }, [isLastSlide, onToggle])
 
   const sendMessage = async () => {
     const text = input.trim()
@@ -97,34 +118,37 @@ export default function ChatBot({ isLastSlide }: { isLastSlide: boolean }) {
     }
   }
 
-  if (!isLastSlide) return null
+  // Never return null — the panel must always be mountable so external triggers work.
+  // Only the topbar trigger button is hidden when isLastSlide is false.
 
   return (
     <>
-      {/* Topbar chat trigger button */}
-      <motion.button
-        className="chatbot-topbar-btn"
-        onClick={() => setOpen(o => !o)}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
-        aria-label="Open AI assistant"
-        title="Ask our AI assistant"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {/* Topbar trigger — only visible on designated slides (linear deck) */}
+      {isLastSlide && (
+        <motion.button
+          className="chatbot-topbar-btn"
+          onClick={() => setOpen(o => !o)}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+          aria-label="Open AI assistant"
+          title="Ask our AI assistant"
         >
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-        <span>Ask AI</span>
-      </motion.button>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <span>Ask AI</span>
+        </motion.button>
+      )}
 
       {/* Chat panel */}
       <AnimatePresence>

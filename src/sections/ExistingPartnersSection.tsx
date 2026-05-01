@@ -11,7 +11,7 @@ const CURRENT_PARTNERS = [
     color: '#f26522',
     desc: 'Naming rights and IP licensing for Nickelodeon Universe — the largest indoor theme park in the Western Hemisphere. Character appearances, exclusive merchandise, and ongoing content activations.',
     assets: ['Full theme park naming rights', 'Character IP (SpongeBob, PAW Patrol, TMNT)', 'Live Slime Time shows', 'Exclusive in-park merchandise'],
-    img: 'https://images.pexels.com/photos/1038935/pexels-photo-1038935.jpeg?auto=compress&cs=tinysrgb&w=1400'
+    img: '/assets/images/nick_paramount.png'
   },
   {
     name: 'DreamWorks / Universal',
@@ -21,7 +21,7 @@ const CURRENT_PARTNERS = [
     color: '#1c3557',
     desc: 'IP partner for DreamWorks Water Park — the largest indoor water park in North America. Features Shrek, Madagascar, Trolls, and Kung Fu Panda themed water park zones and cabanas.',
     assets: ['Full water park naming rights', 'IP licensing (Shrek, Madagascar, Trolls)', '19 branded cabanas', '28 luxury skyboxes'],
-    img: 'https://images.pexels.com/photos/2275217/pexels-photo-2275217.jpeg?auto=compress&cs=tinysrgb&w=1400'
+    img: '/assets/images/dreamworks_waterpark.png'
   },
   {
     name: 'LEGO / Merlin Entertainments',
@@ -31,7 +31,7 @@ const CURRENT_PARTNERS = [
     color: '#e8001a',
     desc: 'LEGOLAND Discovery Center — an indoor LEGO experience featuring the Imagination Express ride, 4D cinema, and a Miniland recreation of the New York and New Jersey skyline.',
     assets: ['Full attraction naming rights', 'LEGO brand integration', '4D cinema & Miniland', 'LEGO Master Builder program'],
-    img: 'https://images.pexels.com/photos/208587/pexels-photo-208587.jpeg?auto=compress&cs=tinysrgb&w=1400'
+    img: '/assets/images/lego_discovery.png'
   },
   {
     name: 'Merlin (SEA LIFE)',
@@ -41,7 +41,7 @@ const CURRENT_PARTNERS = [
     color: '#00897b',
     desc: 'SEA LIFE Aquarium — world\'s leading aquarium chain. Features 200+ species and a 360° underwater tunnel. Private events, school field trips, and seasonal branded activations.',
     assets: ['Aquarium naming rights', '200+ marine species display', '360° underwater tunnel', 'Educational field trip programs'],
-    img: 'https://images.pexels.com/photos/2192080/pexels-photo-2192080.jpeg?auto=compress&cs=tinysrgb&w=1400'
+    img: '/assets/images/partners_sealife.png'
   },
   {
     name: 'Coca-Cola',
@@ -51,7 +51,7 @@ const CURRENT_PARTNERS = [
     color: '#e8001a',
     desc: 'Exclusive 10-year beverage partnership across the entire American Dream campus. Includes branded "Coca-Cola Social Bubble" experiential zone, all-venue pouring rights, and digital branding.',
     assets: ['Exclusive campus pouring rights', 'Coca-Cola Social Bubble activation zone', 'Digital display integrations', '10-year exclusivity through 2029'],
-    img: 'https://images.pexels.com/photos/50593/coca-cola-cold-drink-soft-drink-coke-50593.jpeg?auto=compress&cs=tinysrgb&w=1400'
+    img: '/assets/images/partners_cocacola.png'
   },
   {
     name: 'Sesame Workshop',
@@ -111,7 +111,7 @@ const CURRENT_PARTNERS = [
     color: '#e8001a',
     desc: 'Angry Birds Mini Golf — 18-hole mini golf attraction fully themed around the Angry Birds franchise. Indoor, year-round attraction benefiting from the 40M annual visitor footprint.',
     assets: ['Full mini golf naming rights', 'Angry Birds IP integration', '18-hole indoor course', 'Character meet-and-greet opportunities'],
-    img: 'https://images.pexels.com/photos/135018/pexels-photo-135018.jpeg?auto=compress&cs=tinysrgb&w=1400'
+    img: '/assets/images/partners_angrybirds.png'
   },
 ]
 
