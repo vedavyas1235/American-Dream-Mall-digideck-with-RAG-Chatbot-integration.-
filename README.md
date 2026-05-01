@@ -39,7 +39,7 @@ To provide immediate, data-backed answers, the platform features a fully custom 
 *   **RAG Engine:** LangChain orchestration.
 *   **Vector Database:** Local persistent ChromaDB.
 *   **Embeddings Model:** HuggingFace `sentence-transformers/all-MiniLM-L6-v2`.
-*   **LLM Engine:** Tencent HY3 Preview (`tencent/hy3-preview:free`) via OpenRouter API.
+*   **LLM Engine:** via OpenRouter API.
 
 ### Deployment
 *   **Frontend** → Vercel (auto-deploys on GitHub push)
